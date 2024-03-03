@@ -4,7 +4,7 @@ name: Python application continuous integration
 on:
   pull_request:
   push:
-    branches: [master]
+    branches: [master, develop]
 permissions:
   contents: read
 jobs:
@@ -24,8 +24,6 @@ jobs:
         with:
           path: ~/.local/share/virtualenvs
           key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-      - name: Install dependencies
-        if: steps.cache-pipenv.outputs.cache-hit != 'true'
       - name: Run Mypy
         run: |
           pipenv run mypy
